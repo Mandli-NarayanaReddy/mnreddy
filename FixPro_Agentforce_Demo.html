@@ -409,6 +409,26 @@ embeddedservice_bootstrap.utilAPI.launchChat();
         alert("Demo booking submitted successfully!");
     }
 </script>
+   <script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00DgK00000b1q7J',
+				'ServiceAgentChannel',
+				'https://orgfarm-d44e5d70dc-dev-ed.develop.my.site.com/ESWServiceAgentChannel1790747551115',
+				{
+					scrt2URL: 'https://orgfarm-d44e5d70dc-dev-ed.develop.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://orgfarm-d44e5d70dc-dev-ed.develop.my.site.com/ESWServiceAgentChannel1790747551115/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
 
 </body>
 </html>
