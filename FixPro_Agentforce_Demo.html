@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixPro | Home Services</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #10233f;
+        background: #f7f9fc;
+        line-height: 1.6;
+    }
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: #0b2341;
+        color: white;
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 7%;
+        box-shadow: 0 2px 12px rgba(0,0,0,.12);
+    }
+    .logo {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -.5px;
+    }
+    .logo span { color: #ffb511; }
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    nav a:hover { color: #ffb511; }
+
+    .hero {
+        min-height: 610px;
+        display: flex;
+        align-items: center;
+        padding: 70px 7%;
+        position: relative;
+        overflow: hidden;
+        background:
+            linear-gradient(90deg, rgba(7,31,57,.98) 0%, rgba(9,39,72,.90) 48%, rgba(9,39,72,.62) 100%),
+            radial-gradient(circle at 80% 25%, #526b85 0, #203d5d 30%, #0b2341 65%);
+    }
+    .hero:after {
+        content: "FIXPRO";
+        position: absolute;
+        right: -30px;
+        bottom: -50px;
+        font-size: 180px;
+        font-weight: 900;
+        color: rgba(255,255,255,.035);
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 2; }
+    .tag {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid rgba(255,255,255,.35);
+        border-radius: 30px;
+        color: #ffb511;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+    h1 {
+        font-size: clamp(44px, 6vw, 76px);
+        line-height: 1.04;
+        color: white;
+        margin-bottom: 25px;
+    }
+    h1 span { color: #ffb511; }
+    .hero p {
+        color: #e7edf5;
+        font-size: 19px;
+        max-width: 650px;
+        margin-bottom: 32px;
+    }
+    .buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        padding: 15px 28px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 800;
+        display: inline-block;
+    }
+    .primary { background: #ffb511; color: #111; }
+    .secondary { background: transparent; color: white; border: 2px solid white; }
+    .primary:hover { background: #ffc33d; }
+    .secondary:hover { background: white; color: #0b2341; }
+
+    section { padding: 75px 7%; }
+    .section-title { text-align: center; margin-bottom: 42px; }
+    .section-title h2 { font-size: 38px; margin-bottom: 10px; }
+    .section-title p { color: #66758a; }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 22px;
+    }
+    .card {
+        background: white;
+        border-radius: 14px;
+        padding: 30px 24px;
+        box-shadow: 0 7px 25px rgba(16,35,63,.08);
+        transition: transform .2s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .icon {
+        width: 56px; height: 56px;
+        border-radius: 12px;
+        background: #fff1c9;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 28px;
+        margin-bottom: 18px;
+    }
+    .card h3 { margin-bottom: 9px; }
+    .card p { color: #68778b; font-size: 14px; }
+
+    .why {
+        background: #0b2341;
+        color: white;
+    }
+    .why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    .why-box {
+        padding: 28px;
+        border: 1px solid rgba(255,255,255,.14);
+        border-radius: 14px;
+        background: rgba(255,255,255,.04);
+    }
+    .why-box strong { color: #ffb511; font-size: 30px; display: block; }
+
+    .booking {
+        max-width: 850px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 16px;
+        box-shadow: 0 7px 25px rgba(16,35,63,.08);
+    }
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+    .full { grid-column: 1 / -1; }
+    label { display: block; font-weight: 700; margin-bottom: 7px; }
+    input, select, textarea {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #d4dce7;
+        border-radius: 8px;
+        font: inherit;
+        outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #ffb511; }
+    textarea { min-height: 110px; resize: vertical; }
+    .submit {
+        margin-top: 20px;
+        width: 100%;
+        background: #ffb511;
+        border: 0;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+
+    footer {
+        background: #06172b;
+        color: #b9c6d6;
+        padding: 30px 7%;
+        text-align: center;
+    }
+
+    /* This is the placeholder area for Salesforce Embedded Messaging.
+       Replace/augment this with your Salesforce deployment snippet. */
+    #salesforce-messaging-container {
+        position: fixed;
+        right: 24px;
+        bottom: 92px;
+        z-index: 9998;
+    }
+
+    .chat-button {
+        position: fixed;
+        right: 28px;
+        bottom: 28px;
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        border: 0;
+        background: #0b4f8a;
+        color: white;
+        cursor: pointer;
+        z-index: 10000;
+        box-shadow: 0 8px 25px rgba(0,0,0,.25);
+        font-size: 29px;
+    }
+    .chat-button:hover { transform: scale(1.05); }
+
+    @media (max-width: 900px) {
+        .cards { grid-template-columns: repeat(2, 1fr); }
+        .why-grid { grid-template-columns: 1fr; }
+        nav ul { gap: 14px; }
+    }
+    @media (max-width: 650px) {
+        nav { padding: 0 20px; }
+        nav ul { display: none; }
+        section { padding: 55px 20px; }
+        .hero { padding: 60px 20px; }
+        .cards { grid-template-columns: 1fr; }
+        .form-grid { grid-template-columns: 1fr; }
+        .full { grid-column: auto; }
+    }
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Fix<span>Pro</span></div>
+    <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#booking">Book Service</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="tag">TRUSTED HOME SERVICES</div>
+        <h1>Reliable Home Services<br><span>At Your Door</span></h1>
+        <p>
+            From AC repair and plumbing to electrical work and home cleaning,
+            FixPro connects you with trusted professionals for all your home service needs.
+        </p>
+        <div class="buttons">
+            <a class="btn primary" href="#booking">Book a Service</a>
+            <a class="btn secondary" href="#services">Explore Services</a>
+        </div>
+    </div>
+</header>
+
+<section id="services">
+    <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Professional help for the jobs that matter at home.</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="icon">❄️</div>
+            <h3>AC Repair</h3>
+            <p>Installation, servicing, cooling problems and emergency AC repair.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🔧</div>
+            <h3>Plumbing</h3>
+            <p>Leak repairs, pipe work, taps, drainage and bathroom plumbing.</p>
+        </div>
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Electrical</h3>
+            <p>Switches, wiring, fans, lights, power issues and electrical repairs.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🧹</div>
+            <h3>Home Cleaning</h3>
+            <p>Reliable cleaning services for kitchens, bathrooms and complete homes.</p>
+        </div>
+    </div>
+</section>
+
+<section class="why" id="why">
+    <div class="section-title">
+        <h2>Why Choose FixPro?</h2>
+        <p style="color:#b9c6d6;">Simple, reliable and professional home service.</p>
+    </div>
+
+    <div class="why-grid">
+        <div class="why-box">
+            <strong>01</strong>
+            <h3>Verified Professionals</h3>
+            <p>Connect with experienced service professionals.</p>
+        </div>
+        <div class="why-box">
+            <strong>02</strong>
+            <h3>Quick Response</h3>
+            <p>Get help for your home service requirements quickly.</p>
+        </div>
+        <div class="why-box">
+            <strong>03</strong>
+            <h3>Easy Booking</h3>
+            <p>Tell us what you need and get your service request started.</p>
+        </div>
+    </div>
+</section>
+
+<section id="booking">
+    <div class="section-title">
+        <h2>Book a Service</h2>
+        <p>Submit your requirement and our team will get in touch.</p>
+    </div>
+
+    <div class="booking">
+        <form onsubmit="submitBooking(event)">
+            <div class="form-grid">
+                <div>
+                    <label for="name">Full Name</label>
+                    <input id="name" required placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input id="phone" required placeholder="Enter phone number">
+                </div>
+                <div>
+                    <label for="service">Service</label>
+                    <select id="service" required>
+                        <option value="">Select a service</option>
+                        <option>AC Repair</option>
+                        <option>Plumbing</option>
+                        <option>Electrical</option>
+                        <option>Home Cleaning</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="date">Preferred Date</label>
+                    <input id="date" type="date" required>
+                </div>
+                <div class="full">
+                    <label for="message">Requirement</label>
+                    <textarea id="message" placeholder="Describe your problem..."></textarea>
+                </div>
+            </div>
+            <button class="submit" type="submit">Submit Service Request</button>
+        </form>
+    </div>
+</section>
+
+<footer id="contact">
+    <p><strong>FixPro</strong> — Reliable Home Services</p>
+    <p>Phone: +91 90000 00000 &nbsp; | &nbsp; Email: support@fixpro.example</p>
+    <p style="margin-top:8px;font-size:13px;">Demo website for Salesforce Agentforce / Embedded Messaging integration.</p>
+</footer>
+
+<!--
+=========================================================
+SALESFORCE AGENTFORCE INTEGRATION AREA
+=========================================================
+
+Paste your Salesforce Embedded Messaging deployment CODE SNIPPET
+in this area, as provided by Salesforce.
+
+The website already contains a chat button below.
+After your Salesforce snippet is configured, you can connect
+the button to:
+
+embeddedservice_bootstrap.utilAPI.launchChat();
+
+=========================================================
+-->
+
+<div id="salesforce-messaging-container"></div>
+
+<button class="chat-button" id="chatButton" aria-label="Open FixPro Assistant" title="Chat with FixPro">
+    💬
+</button>
+
+<script>
+    // Demo behavior only.
+    // After adding your Salesforce Embedded Messaging snippet,
+    // replace this function with the Salesforce launchChat call.
+    document.getElementById("chatButton").addEventListener("click", function () {
+        if (window.embeddedservice_bootstrap &&
+            window.embeddedservice_bootstrap.utilAPI) {
+
+            window.embeddedservice_bootstrap.utilAPI.launchChat();
+        } else {
+            // Temporary message so you know the button works.
+            // REMOVE this block after Salesforce Embedded Messaging is installed.
+            console.log("Salesforce Agentforce is not connected yet.");
+        }
+    });
+
+    function submitBooking(event) {
+        event.preventDefault();
+        alert("Demo booking submitted successfully!");
+    }
+</script>
+
+</body>
+</html>
